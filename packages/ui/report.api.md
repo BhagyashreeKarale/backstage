@@ -1078,6 +1078,13 @@ export interface ContainerProps
 }
 
 // @public (undocumented)
+export interface CursorPaginationOptions
+  extends Omit<PaginationOptions, 'initialOffset'> {
+  // (undocumented)
+  initialCursor?: string;
+}
+
+// @public (undocumented)
 export interface CursorParams<TFilter> {
   // (undocumented)
   cursor: string | undefined;
@@ -1737,6 +1744,22 @@ export interface HeaderTab {
 }
 
 // @public (undocumented)
+export interface InfiniteScrollPagination {
+  // (undocumented)
+  hasMoreItems: boolean;
+  // (undocumented)
+  hasPreviousPages: boolean;
+  // (undocumented)
+  isLoading: boolean;
+  // (undocumented)
+  onLoadMore: () => void;
+  // (undocumented)
+  onLoadPrevious: () => void;
+  // (undocumented)
+  type: 'infinite';
+}
+
+// @public (undocumented)
 export type JustifyContent =
   | 'stretch'
   | 'start'
@@ -2138,6 +2161,8 @@ export interface PaginationOptions
       | 'showPaginationLabel'
     >
   > {
+  // (undocumented)
+  infinite?: boolean;
   // (undocumented)
   initialOffset?: number;
 }
@@ -2885,7 +2910,10 @@ export type TablePaginationOwnProps = {
 export interface TablePaginationProps extends TablePaginationOwnProps {}
 
 // @public (undocumented)
-export type TablePaginationType = NoPagination | PagePagination;
+export type TablePaginationType =
+  | NoPagination
+  | PagePagination
+  | InfiniteScrollPagination;
 
 // @public (undocumented)
 export interface TableProps<T extends TableItem> {
@@ -3386,7 +3414,7 @@ export interface UseTableCursorOptions<T extends TableItem, TFilter = unknown>
   // (undocumented)
   mode: 'cursor';
   // (undocumented)
-  paginationOptions?: Omit<PaginationOptions, 'initialOffset'>;
+  paginationOptions?: CursorPaginationOptions;
 }
 
 // @public (undocumented)
