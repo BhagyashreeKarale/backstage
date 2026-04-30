@@ -3366,6 +3366,7 @@ __metadata:
   resolution: "@backstage/connections@workspace:packages/connections"
   dependencies:
     "@backstage/backend-plugin-api": "workspace:^"
+    "@backstage/backend-test-utils": "workspace:^"
     "@backstage/cli-common": "workspace:^"
     "@backstage/config": "workspace:^"
     "@backstage/connections": "workspace:^"
