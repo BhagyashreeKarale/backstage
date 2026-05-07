@@ -552,10 +552,22 @@ const _default: OverridableFrontendPlugin<
     }>;
     'sub-page:scaffolder/templates': OverridableExtensionDefinition<{
       config: {
+        groups:
+          | {
+              title: string;
+              filter: FilterPredicate;
+            }[]
+          | undefined;
         path: string | undefined;
         title: string | undefined;
       };
       configInput: {
+        groups?:
+          | {
+              title: string;
+              filter: FilterPredicate;
+            }[]
+          | undefined;
         path?: string | undefined;
         title?: string | undefined;
       };
