@@ -1,5 +1,17 @@
 # @backstage/plugin-catalog-backend
 
+## 3.6.2-next.2
+
+### Patch Changes
+
+- ccbad9d: Improved the performance of the `catalog_entities_count` metric.
+
+  The legacy Prometheus and OpenTelemetry observable gauges previously each ran their own copy of the per-kind count query against the `search` table on every metrics scrape. On large catalogs this could pile up faster than the queries completed, contending for buffers and stalling the database.
+
+  The two callbacks now share a single query result with a short in-process TTL cache, and the underlying query reads from `final_entities` instead of `search`, avoiding the bitmap heap scans that dominated the previous form. The emitted labels and values are unchanged.
+
+- 3f55b73: Improved the performance of the entity facets endpoint when filters are applied. The filtered entity set is now combined with the search table through an inner join rather than a `WHERE entity_id IN (subquery)`. Results are unchanged; on large catalogs the query planner is able to choose dramatically cheaper plans, with measured improvements ranging from roughly 1.2× on already-fast cases to 7× or more on high-cardinality facets.
+
 ## 3.6.2-next.1
 
 ### Patch Changes
